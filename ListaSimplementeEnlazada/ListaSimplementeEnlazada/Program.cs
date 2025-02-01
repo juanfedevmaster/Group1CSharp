@@ -5,15 +5,18 @@
         static void Main(string[] args)
         {
             Lista lista = new Lista();
-            lista.InsertarInicio(5);
-            lista.InsertarInicio(10);
-            lista.InsertarInicio(15);
-            lista.InsertarInicio(20);
-            lista.InsertarInicio(25);
 
-            lista.Recorrer();
+            for (int i = 0; i < 1000000; i++)
+            {
+                Random rand = new Random();
+                lista.InsertarInicio(rand.Next(1, 1000000));
+            }
 
-            List<int> listaReal = new List<int>();
+            lista.Buscar(58701);
+
+            //lista.Recorrer();
+
+            /*List<int> listaReal = new List<int>();
             listaReal.Add(5);
             listaReal.Add(10);
             listaReal.Add(15);
@@ -25,7 +28,7 @@
             for (int i = 0; i < listaReal.Count; i++)
             {
                Console.WriteLine(listaReal[i]);
-            }
+            }*/
         }
     }
 }
