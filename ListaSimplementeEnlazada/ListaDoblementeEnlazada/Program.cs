@@ -14,6 +14,11 @@
             lista.InsertarMitad(100);
 
             lista.Recorrer();
+
+            List<int> lista2 = new List<int>();
+
+            lista2.OrderByDescending(x => x);
+            lista2.OrderBy(x => x);
         }
     }
 }
