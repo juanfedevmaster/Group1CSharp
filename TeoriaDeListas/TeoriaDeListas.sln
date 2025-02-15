@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListaSimplementeEnlazada", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListaDoblementeEnlazada", "ListaDoblementeEnlazada\ListaDoblementeEnlazada.csproj", "{10AA2C73-5178-4646-BE59-210B90E0FA85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListasCSharp", "ListasCSharp\ListasCSharp.csproj", "{D239E7A0-1FEB-4206-A6DD-7FAEBF0432AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{10AA2C73-5178-4646-BE59-210B90E0FA85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10AA2C73-5178-4646-BE59-210B90E0FA85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10AA2C73-5178-4646-BE59-210B90E0FA85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D239E7A0-1FEB-4206-A6DD-7FAEBF0432AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D239E7A0-1FEB-4206-A6DD-7FAEBF0432AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D239E7A0-1FEB-4206-A6DD-7FAEBF0432AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D239E7A0-1FEB-4206-A6DD-7FAEBF0432AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
