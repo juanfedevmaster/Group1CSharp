@@ -1,0 +1,6 @@
+@FarmaciaTalentoTech_HostAddress = http://localhost:5007
+
+GET {{FarmaciaTalentoTech_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
