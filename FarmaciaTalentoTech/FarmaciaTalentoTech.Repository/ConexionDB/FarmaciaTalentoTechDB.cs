@@ -18,6 +18,51 @@ public class FarmaciaTalentoTechDB
         ConnectionString = connectionString;
     }
 
+    /// <summary>
+    /// Crea un nuevo usuario en la base de datos.
+    /// </summary>
+    /// <param name="usuario"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
+    public bool CrearUsuario(Usuario usuario)
+    {
+        var conn = new SqlConnection(ConnectionString);
+        try
+        {
+            var cmd = new SqlCommand("usp_creacion_usuario", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            cmd.Parameters.Add(new SqlParameter("@NombreUsuario", usuario.NombreUsuario));
+            cmd.Parameters.Add(new SqlParameter("@Email", usuario.Email));
+            cmd.Parameters.Add(new SqlParameter("@Password", usuario.Password));
+            cmd.Parameters.Add(new SqlParameter("@IdRole", usuario.IdRol));
+
+            conn.Open();
+            var rowsAffected = cmd.ExecuteNonQuery();
+            return rowsAffected > 0; // Retorna true si se creó el usuario correctamente
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al conectar a la base de datos: {ex.Message}");
+            throw new Exception("Error, comuniquese con el Administrador.", ex);
+        }
+        finally
+        {
+            if (conn.State == System.Data.ConnectionState.Open)
+            {
+                conn.Close();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Obtiene un usuario de la base de datos por nombre de usuario y contraseña.
+    /// </summary>
+    /// <param name="nombreUsuario"></param>
+    /// <param name="password"></param>
+    /// <returns></returns>
+    /// <exception cref="Exception"></exception>
     public Usuario ObtenerUsuario(string nombreUsuario, string password)
     {
         var conn = new SqlConnection(ConnectionString);
