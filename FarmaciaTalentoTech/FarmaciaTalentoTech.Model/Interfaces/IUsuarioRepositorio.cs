@@ -8,6 +8,7 @@ namespace FarmaciaTalentoTech.Model.Interfaces
         bool ActualizarUsuario(Usuario usuario);
         bool EliminarUsuario(string nombreUsuario);
         Usuario ObtenerUsuario(string nombreUsuario);
+        int ValidarUsuariosMismoNombre(string nombreUsuario);
         Usuario AutenticarUsuario(string nombreUsuario, string password);
     }
 }

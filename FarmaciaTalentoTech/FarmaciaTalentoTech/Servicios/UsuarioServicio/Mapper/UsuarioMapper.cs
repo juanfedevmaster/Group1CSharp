@@ -1,6 +1,6 @@
 ﻿using Dto = FarmaciaTalentoTech.Model.Dto;
 using Modelo = FarmaciaTalentoTech.Model.Modelos;
-namespace FarmaciaTalentoTech.WebApi.Servicios.Mapper
+namespace FarmaciaTalentoTech.WebApi.Servicios.UsuarioServicio.Mapper
 {
     public class UsuarioMapper
     {

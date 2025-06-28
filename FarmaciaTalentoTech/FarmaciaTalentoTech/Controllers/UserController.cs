@@ -1,10 +1,10 @@
 using FarmaciaTalentoTech.Model.Dto;
 using FarmaciaTalentoTech.Model.Interfaces;
 using FarmaciaTalentoTech.RepositoryEF.DataBaseContext;
-using FarmaciaTalentoTech.WebApi.Servicios;
-using FarmaciaTalentoTech.WebApi.Servicios.Mapper;
-using Microsoft.AspNetCore.Http;
+using FarmaciaTalentoTech.WebApi.Servicios.UsuarioServicio;
+using FarmaciaTalentoTech.WebApi.Servicios.UsuarioServicio.Mapper;
 using Microsoft.AspNetCore.Mvc;
+using Dto = FarmaciaTalentoTech.Model.Dto;
 
 namespace FarmaciaTalentoTech.WebApi.Controllers
 {
@@ -14,33 +14,81 @@ namespace FarmaciaTalentoTech.WebApi.Controllers
     {
         private FarmaciaTalentoTechContext _farmaciaTalentoTech;
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private readonly IRolesRepositorio _rolRepositorio;
+        private readonly UsuarioServicios _usuarioServicios;
 
-        public UserController(FarmaciaTalentoTechContext farmaciaTalentoTech, IUsuarioRepositorio usuarioRepositorio)
+        public UserController(FarmaciaTalentoTechContext farmaciaTalentoTech, IUsuarioRepositorio usuarioRepositorio, IRolesRepositorio rolesRepositorio)
         {
             _farmaciaTalentoTech = farmaciaTalentoTech;
             _usuarioRepositorio = usuarioRepositorio;
+            _rolRepositorio = rolesRepositorio;
+            _usuarioServicios = new UsuarioServicios(_usuarioRepositorio, _rolRepositorio);
         }
 
         [HttpGet]
-        [Route("api/auth")]
+        [Route("api/Auth")]
         public IActionResult AutenticarUsuario(string nombreUsuario, string password)
         {
-            var usuarioServicios = new UsuarioServicios(_usuarioRepositorio, _farmaciaTalentoTech);
             try
             {
-                var usuario = usuarioServicios.Authenticar(nombreUsuario, password);
+                var usuario = _usuarioServicios.Authenticar(nombreUsuario, password);
                 if (usuario != null)
                 {
-                    return Ok(new { mensaje = "Autenticado", usuarioObjeto = UsuarioMapper.MapToUsuarioDto(usuario)});
+                    return Ok(new { mensaje = "Autenticado", estado = true });
                 }
                 else
                 {
-                    return StatusCode(401, new { mensaje = "El usuario y el password no existen en la base de datos." });
+                    return StatusCode(401, new { mensaje = "El usuario y el password no existen en la base de datos.", estado = false });
                 }
             }
             catch (Exception ex)
             {
                 return StatusCode(500, new { mensaje = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("api/GetUsuarioPerfil")]
+        public IActionResult GetUsuarioPerfil(string nombreUsuario)
+        {
+            try
+            {
+                var usuario = _usuarioServicios.ObtenerUsuario(nombreUsuario);
+                if (usuario != null)
+                {
+                    return Ok(new { mensaje = "Autenticado", usuario = UsuarioMapper.MapToUsuarioDto(usuario)});
+                }
+                else
+                {
+                    return StatusCode(401, new { mensaje = "El usuario y el password no existen en la base de datos.", estado = false });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = ex.Message });
+            }
+        }
+
+        [HttpPut]
+        [Route("api/ActualizarUsuario")]
+        public IActionResult ActualizarUsuario(Dto.Usuario usuario)
+        {
+            try
+            {
+                var usuarioModificado = _usuarioServicios.ActualizarUsuario(usuario);
+                if (usuarioModificado)
+                {
+                    return Ok(new { mensaje = "Usuario actualizado correctamente.", actualizado = true });
+                }
+                else
+                {
+                    return StatusCode(500, new { mensaje = "Error al actualizar el usuario. Contacte al Administrador." });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensaje = ex.Message });
+
             }
         }
 

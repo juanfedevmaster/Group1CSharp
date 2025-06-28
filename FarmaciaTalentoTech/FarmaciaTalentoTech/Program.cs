@@ -25,6 +25,7 @@ public class Program
             options.UseSqlServer(builder.Configuration.GetConnectionString("FarmaciaTalentoTechDBConnection")));
 
         builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+        builder.Services.AddScoped<IRolesRepositorio, RolRepositorio>();
 
         var app = builder.Build();
 

@@ -15,9 +15,18 @@ namespace FarmaciaTalentoTech.RepositoryEF
 
         public bool ActualizarUsuario(Usuario usuario)
         {
-            throw new NotImplementedException();
-        }
+            _farmaciaTalentoTechContext.Usuarios.Update(usuario);
 
+            try
+            {
+                _farmaciaTalentoTechContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el usuario: " + ex.Message);
+            }
+        }
         public bool CrearUsuario(Usuario usuario)
         {
             throw new NotImplementedException();
@@ -30,7 +39,11 @@ namespace FarmaciaTalentoTech.RepositoryEF
 
         public Usuario ObtenerUsuario(string nombreUsuario)
         {
-            throw new NotImplementedException();
+            var usuario = _farmaciaTalentoTechContext.Usuarios
+                .Include(u => u.IdRoleNavigation)
+                .FirstOrDefault(u => u.NombreUsuario.Equals(nombreUsuario));
+
+            return usuario;
         }
         public Usuario AutenticarUsuario(string nombreUsuario, string password)
         {
@@ -39,6 +52,14 @@ namespace FarmaciaTalentoTech.RepositoryEF
                 .FirstOrDefault(u => u.NombreUsuario.Equals(nombreUsuario) && u.Password.Equals(password));
 
             return usuario;
+        }
+
+        public int ValidarUsuariosMismoNombre(string nombreUsuario)
+        {
+            var usuariosMismoNombre = _farmaciaTalentoTechContext.Usuarios
+                .Count(u => u.NombreUsuario.Equals(nombreUsuario));
+
+            return usuariosMismoNombre;
         }
     }
 }
