@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmaciaTalentoTech.Model",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmaciaTalentoTech.Repository", "FarmaciaTalentoTech.Repository\FarmaciaTalentoTech.Repository.csproj", "{8FB63F17-C591-4BBF-92DD-B7F6995A1929}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ejemplo Linq", "Ejemplo Linq", "{809B5FED-9DBD-4EBA-9614-F03739AAF54A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqEjemplo", "LinqEjemplo\LinqEjemplo.csproj", "{B4DDDE94-094A-456F-BB38-D4B86DC9A06E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FarmaciaTalentoTech.RepositoryEF", "FarmaciaTalentoTech.RepositoryEF\FarmaciaTalentoTech.RepositoryEF.csproj", "{971C946A-C956-43A8-A96F-13CEC65DF231}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +33,19 @@ Global
 		{8FB63F17-C591-4BBF-92DD-B7F6995A1929}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FB63F17-C591-4BBF-92DD-B7F6995A1929}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FB63F17-C591-4BBF-92DD-B7F6995A1929}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4DDDE94-094A-456F-BB38-D4B86DC9A06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4DDDE94-094A-456F-BB38-D4B86DC9A06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4DDDE94-094A-456F-BB38-D4B86DC9A06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4DDDE94-094A-456F-BB38-D4B86DC9A06E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{971C946A-C956-43A8-A96F-13CEC65DF231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{971C946A-C956-43A8-A96F-13CEC65DF231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{971C946A-C956-43A8-A96F-13CEC65DF231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{971C946A-C956-43A8-A96F-13CEC65DF231}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B4DDDE94-094A-456F-BB38-D4B86DC9A06E} = {809B5FED-9DBD-4EBA-9614-F03739AAF54A}
 	EndGlobalSection
 EndGlobal

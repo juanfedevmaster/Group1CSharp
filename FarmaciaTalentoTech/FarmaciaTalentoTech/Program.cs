@@ -1,4 +1,10 @@
 
+using FarmaciaTalentoTech.Model.Interfaces;
+using FarmaciaTalentoTech.RepositoryEF;
+using FarmaciaTalentoTech.RepositoryEF.DataBaseContext;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+
 namespace FarmaciaTalentoTech.WebApi;
 
 public class Program
@@ -14,14 +20,18 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        //builder.Services.AddScoped<IFarmaciaTalentoTechDB, FarmaciaTalentoTechDB>();
+        builder.Services.AddDbContext<FarmaciaTalentoTechContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("FarmaciaTalentoTechDBConnection")));
+
+        builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
         app.UseAuthorization();
 
