@@ -29,12 +29,30 @@ namespace FarmaciaTalentoTech.RepositoryEF
         }
         public bool CrearUsuario(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _farmaciaTalentoTechContext.Usuarios.Add(usuario);
+
+            try
+            {
+                _farmaciaTalentoTechContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex) {
+                throw new Exception("Error al crear el usuario: " + ex.Message);
+            }
         }
 
-        public bool EliminarUsuario(string nombreUsuario)
+        public bool EliminarUsuario(Usuario nombreUsuario)
         {
-            throw new NotImplementedException();
+            _farmaciaTalentoTechContext.Usuarios.Remove(nombreUsuario);
+            try
+            {
+                _farmaciaTalentoTechContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el usuario: " + ex.Message);
+            }
         }
 
         public Usuario ObtenerUsuario(string nombreUsuario)
@@ -45,11 +63,11 @@ namespace FarmaciaTalentoTech.RepositoryEF
 
             return usuario;
         }
-        public Usuario AutenticarUsuario(string nombreUsuario, string password)
+        public Usuario AutenticarUsuario(string nombreUsuario)
         {
             var usuario = _farmaciaTalentoTechContext.Usuarios
                 .Include(usuario => usuario.IdRoleNavigation)
-                .FirstOrDefault(u => u.NombreUsuario.Equals(nombreUsuario) && u.Password.Equals(password));
+                .FirstOrDefault(u => u.NombreUsuario.Equals(nombreUsuario));
 
             return usuario;
         }

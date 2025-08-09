@@ -27,5 +27,22 @@ namespace FarmaciaTalentoTech.WebApi.Servicios.UsuarioServicio.Mapper
                 DescripcionRol = usuario.IdRoleNavigation?.Descripcion ?? string.Empty,
             };
         }
+
+        public static Modelo.Usuario? MapToUsuarioModelo(Dto.Usuario? modelo) {
+            if (modelo == null)
+            {
+                return null;
+            }
+
+            return new Modelo.Usuario
+            {
+                Id = modelo.Id,
+                NombreUsuario = modelo.NombreUsuario,
+                Email = modelo.Email,
+                Password = BCrypt.Net.BCrypt.HashPassword(modelo.Password),
+                IdRole = modelo.IdRol,
+                IdRoleNavigation = new Modelo.Role()
+            }; 
+        }
     }
 }
