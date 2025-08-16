@@ -29,14 +29,14 @@ namespace FarmaciaTalentoTech.WebApi.Controllers
             _usuarioServicios = new UsuarioServicios(_usuarioRepositorio, _rolRepositorio,conf,_permisos);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/Auth")]
-        public async Task<IActionResult> AutenticarUsuario(string nombreUsuario, string password)
+        public async Task<IActionResult> AutenticarUsuario(Login login)
         {
             try
             {
                 // JuanFelipe - Pass: Admin123!
-                var usuario = _usuarioServicios.Authenticar(nombreUsuario, password);
+                var usuario = _usuarioServicios.Authenticar(login.NombreUsuario, login.Password);
                 if (usuario != null)
                 {
                     var token = await _usuarioServicios.GenerarJWT(usuario);

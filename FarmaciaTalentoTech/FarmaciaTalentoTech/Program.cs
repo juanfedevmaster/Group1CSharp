@@ -17,8 +17,16 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
+        builder.Services.AddCors(opciones =>
+        {
+            opciones.AddPolicy("PermitirTodo", politica => {
+                politica.AllowAnyOrigin().
+                AllowAnyMethod().
+                AllowAnyHeader();
+            });
+        });
 
+        // Add services to the container.
         builder.Services.AddControllers();
         //builder.Services.AddScoped<IFarmaciaTalentoTechDB, FarmaciaTalentoTechDB>();
         builder.Services.AddDbContext<FarmaciaTalentoTechContext>(options =>
@@ -85,6 +93,7 @@ public class Program
 
         // Configure the HTTP request pipeline.
 
+        app.UseCors("PermitirTodo");
         app.UseSwagger();
         app.UseSwaggerUI();
 

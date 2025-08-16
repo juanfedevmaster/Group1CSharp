@@ -1,0 +1,189 @@
+Pasos para crear un sitio web con ReactJs
+
+1. Instala Node.js puedes Descargalo e instalar Node.js desde https://nodejs.org.
+
+2. Una vez instalada, debes de ejecutar el siguiente comando:
+	npm create vite@latest mi-proyecto-react -- --template react-ts
+	cd mi-proyecto-react
+   
+	Ejemplo Practico:
+	npm create vite@latest farmaciatalentotech-ui -- --template react-ts
+	
+3. Luego debes entrar a la carpeta del proyecto
+   cd mi-plantilla-react
+   
+   Ejemplo Practico:
+   cd cd farmaciatalentotech-ui
+
+4. Personaliza tu plantilla:
+   Modifica los archivos en src/ (por ejemplo, App.js, App.css).
+   Agrega componentes reutilizables, estilos, y estructura base.
+
+5. Usa el npm install para instalar los paquetes necesarios.
+
+6. Prueba la plantilla con el comando:
+   npm start
+
+7. Crea una carpeta para tus componentes con:
+   mkdir src/components
+
+8. Crea un archivo Login.tsx
+
+import React, { useState } from "react";
+
+const Login: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const response = await fetch("https://tu-api.com/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Credenciales incorrectas");
+      }
+
+      //const data = await response.json();
+      // Guarda el token o maneja la autenticación aquí
+      alert("¡Login exitoso!");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Error al iniciar sesión");
+      }
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h2>Iniciar Sesión</h2>
+      <label>
+        Email:
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </label>
+      <br />
+      <label>
+        Contraseña:
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </label>
+      <br />
+      <button type="submit">Entrar</button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+    </form>
+  );
+};
+
+export default Login;
+
+9. Modifiquemos App.tsx
+
+import "./App.css";
+import Login from "./components/Login";
+
+function App() {
+  return (
+    <div>
+      <Login />
+    </div>
+  );
+}
+
+export default App;
+
+10. Instalemos bootstrap
+	npm install bootstrap
+
+11. Importemos bootstrap en el proyecto	
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
+
+12. Ahora modifiquemos el Login de nuevo:
+
+import React, { useState } from 'react';
+
+const Login: React.FC = () => {
+  const [nombreUsuario, setNombreUsuario] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+
+    try {
+      const response = await fetch('http://localhost:5007/User/api/Auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombreUsuario, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Credenciales incorrectas');
+      }
+
+      const data = await response.json();
+      // Aquí puedes guardar el token o manejar la respuesta
+      alert('¡Login exitoso!');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al iniciar sesión');
+    }
+  };
+
+  return (
+    <form className="p-4 border rounded shadow-sm bg-white" style={{ maxWidth: 400, margin: 'auto', marginTop: 50 }} onSubmit={handleSubmit}>
+      <h2 className="mb-3">Iniciar Sesión</h2>
+      <div className="mb-3">
+        <label className="form-label">Usuario:</label>
+        <input
+          type="text"
+          className="form-control"
+          value={nombreUsuario}
+          onChange={e => setNombreUsuario(e.target.value)}
+          required
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Contraseña:</label>
+        <input
+          type="password"
+          className="form-control"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+          required
+        />
+      </div>
+      <button type="submit" className="btn btn-primary w-100">Entrar</button>
+      {error && <div className="alert alert-danger mt-3">{error}</div>}
+    </form>
+  );
+};
+
+export default Login;
