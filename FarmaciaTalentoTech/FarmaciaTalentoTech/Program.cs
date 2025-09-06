@@ -37,6 +37,7 @@ public class Program
         builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
         builder.Services.AddScoped<IRolesRepositorio, RolRepositorio>();
         builder.Services.AddScoped<IPermisoRepositorio, PermisoRepositorio>();
+        builder.Services.AddScoped<IProductoRepositorio, ProductoRepositorio>();
         // JWT Authentication configuration
         var jwtKey = builder.Configuration["Jwt:Key"];
         var jwtIssuer = builder.Configuration["Jwt:Issuer"];

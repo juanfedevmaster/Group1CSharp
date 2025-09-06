@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Servicios\InventarioServicio\**" />
+    <Compile Remove="Servicios\VentaServicio\**" />
+    <Content Remove="Servicios\InventarioServicio\**" />
+    <Content Remove="Servicios\VentaServicio\**" />
+    <EmbeddedResource Remove="Servicios\InventarioServicio\**" />
+    <EmbeddedResource Remove="Servicios\VentaServicio\**" />
+    <None Remove="Servicios\InventarioServicio\**" />
+    <None Remove="Servicios\VentaServicio\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.18" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
@@ -15,11 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FarmaciaTalentoTech.Model\FarmaciaTalentoTech.Model.csproj" />
     <ProjectReference Include="..\FarmaciaTalentoTech.RepositoryEF\FarmaciaTalentoTech.RepositoryEF.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Servicios\InventarioServicio\" />
-    <Folder Include="Servicios\VentaServicio\" />
   </ItemGroup>
 
 </Project>
