@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-const Login: React.FC = () => {
+interface LoginProps {
+  onLoginSuccess: () => void;
+}
+
+const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [nombreUsuario, setNombreUsuario] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -23,7 +27,7 @@ const Login: React.FC = () => {
       const data = await response.json();
       console.log('Login exitoso:', data);
       // Aquí puedes guardar el token o manejar la respuesta
-      alert('¡Login exitoso!');
+      onLoginSuccess();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error al iniciar sesión');
     }
